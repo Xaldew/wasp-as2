@@ -1,0 +1,156 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fancyvrb}
+\title{Supervised Music Taste Analysis}
+\date{WASP Supervised Machine Learning}
+\author[Gustaf]{Gustaf Waldemarson \texttt{gustaf.waldemarson@arm.com}}
+
+\usetheme{wasp}
+
+\graphicspath{{./graphics/}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Choosen Algorithms}
+  \begin{itemize}
+  \item K-Nearest-Neighbours
+  \item Support Vector Machines
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{K-Nearest-Neighbours}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Support Vector Machines}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{The Application}
+
+\begin{Verbatim}[fontsize=\footnotesize]
+    Music Taste Analyzer
+
+    positional arguments:
+    FILE                  The Music Taste classifier training data.
+    FILE                  The new songs to test the classifier on.
+
+    optional arguments:
+    -h, --help            show this help message and exit
+    -c {dtree,lda,qda,grdboost,knn,svm,nbayes,gaussproc,mlpc,adaboost,nusvm,rdforest},
+    The type of classifier to use.
+    -s SEED, --seed SEED  The seed to use for splitting the training data.
+    -p PERCENT, --percent PERCENT
+    Percent of the training/validation splits.
+    -r, --random          Perform a randomized search over the hyperparameters.
+    -n N_ITERS, --n-iters N_ITERS
+    Number of iterations for the randomized search.
+    -d DUMP, --dump DUMP  File to dump the classifier model to.
+    -l LOAD, --load LOAD  Load the classifier model from this file.
+\end{Verbatim}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Randomized Hyperparameter Search}
+
+  \begin{itemize}
+  \item Lots of models - tons of parameters - so little time $\ldots$
+  \item \texttt{sklearn.model\_selection.RandomizedSearchCV}.
+  \end{itemize}
+
+  \note{Don't bother learning the various parameters of so many models, use
+    randomness in your favour instead.}
+
+  \note{\texttt{sk-learn} has a built-in implementation of a randomized
+    parameter-space searcher, so let us try that to estimate the parameters.}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Evaluation}
+
+  \begin{itemize}
+  \item Save one initial split.
+  \item \texttt{sklearn.model\_selection.RandomizedSearchCV}.
+  \item Output the model classification precision.
+  \end{itemize}
+
+  \note{Create a first, random split among the training data, use this as a final
+    validation dataset.}
+
+  \note{Use RandomizedSearchCV to search for hyperparameters. The number of
+    iterations to actually use is configurable by the user.}
+
+  \note{RandomizedSearchCV perform cross-validation internally while searching
+    the parameter space, so we output that as well as an estimate of the
+    classification performance on the initial split.}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Results}
+  \begin{columns}
+    \begin{column}{0.5\columnwidth}
+      \begin{description}
+      \item[knn] 76 \%
+      \item[svm] 81 \%
+      \item[nusvm] 81 \%
+      \item[dtree] 73 \%
+      \item[rdforest] 81 \%
+      \item[adaboost] 79 \%
+      \end{description}
+    \end{column}
+    \begin{column}{0.5\columnwidth}
+      \begin{description}
+      \item[grdboost] 79 \%
+      \item[nbayes] 75 \%
+      \item[gaussproc] 75 \%
+      \item[lda] 78 \%
+      \item[qda] 78 \%
+      \item[mlpc] 81 \%
+      \end{description}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Next Steps}
+
+  From here, there are still a number of things one may want to do:
+
+  \begin{itemize}
+  \item Apply the model to an actual application?
+  \item $\ldots$
+  \end{itemize}
+
+\end{frame}
+
+
+\bgroup
+\setbeamertemplate{background}{}
+\setbeamercolor{background canvas}{bg=black}
+% \setbeamertemplate{navigation symbols}{}
+\begin{frame}[t,plain]{}{}
+  \begin{center}
+    {\tiny \textcolor{white}{The End}}
+  \end{center}
+\end{frame}
+\egroup
+
+\end{document}
