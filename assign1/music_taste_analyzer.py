@@ -184,7 +184,7 @@ PARAM_SPACE_SZ = {
 
 def main(training_data, new_data, classifier,
          seed, percent, rand, niters,
-         dump="", load=""):
+         dump="", load="", csvfile=""):
     """Use the selected classifier to estimate someones music taste.
 
     .. Returns:
@@ -236,14 +236,27 @@ def main(training_data, new_data, classifier,
         if not load:
             clf.fit(X=x_train, y=y_train)
 
+    val_score = clf.score(x_val, y_val)
     print("%s parameters: %s" % (classifier, str(clf.best_params_)))
     print("%s search score: %.2f %%" % (classifier, 100.0 * clf.best_score_))
-    print("%s validation score: %.2f %%" % (classifier, 100.0 * clf.score(x_val, y_val)))
+    print("%s validation score: %.2f %%" % (classifier, 100.0 * val_score))
 
     # Dump the trained model.
     if dump:
         with open(dump, "w") as f:
             pickle.dump(clf, f)
+
+    # Write to the csv file
+    if csvfile:
+        df = pd.read_csv(csvfile)
+        df.at[df.shape[0]-1, classifier] = val_score
+
+        if df.tail(1).isnull().sum(axis=1).tolist()[0] == 0:
+            new_row = pd.DataFrame([[None]*df.shape[1]], 
+                                    columns=df.columns.values.tolist())
+            df = df.append(new_row, ignore_index=True)
+
+        df.to_csv(csvfile, index=False)
 
     # Compute the prediction on the test and print the labels as a single line.
     predictions = (clf.predict(X=X_testn)
@@ -294,6 +307,8 @@ def parse_arguments(argv):
                         help="File to dump the classifier model to.")
     parser.add_argument("-l", "--load", action="store", type=str,
                         help="Load the classifier model from this file.")
+    parser.add_argument("-f", "--file", action="store", type=str,
+                        help="Write to the target CSV file.")
     return parser.parse_args(argv)
 
 
@@ -309,4 +324,5 @@ if __name__ == "__main__":
                   ARGS.random,
                   ARGS.n_iters,
                   ARGS.dump,
-                  ARGS.load))
+                  ARGS.load,
+                  ARGS.file))
