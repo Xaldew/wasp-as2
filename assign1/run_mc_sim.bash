@@ -3,8 +3,7 @@
 # file. Warning: will overwrite any file already present at csvfile argument
 
 csvfile="data/log.csv"
-simulations=5
-: '
+simulations=200
 models=(
     "knn"
     "svm"
@@ -18,12 +17,6 @@ models=(
     "lda"
     "qda"
     "mlpc"
-)
-'
-models=(
-    "knn"
-    "svm"
-    "lda"
 )
 
 # Prepare the csv file
