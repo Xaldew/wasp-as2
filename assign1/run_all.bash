@@ -25,5 +25,5 @@ do
            --random \
            --percent 0.2 \
            --n-iters 100 \
-           --dump ${mode}.pkl
+           --dump ${mod}.pkl
 done

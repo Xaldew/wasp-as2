@@ -250,6 +250,7 @@ def main(training_data, new_data, classifier,
                    .reshape(-1,1)
                    .astype(int)
                    .reshape(1,-1))
+    print("#Ones: %d" % sum(predictions.flatten()))
     print(" ".join(str(i) for i in predictions.flatten()))
 
     return 0
