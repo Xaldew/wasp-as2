@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 
-import sys
-import locale
-import argparse
 import pandas as pd
-
 
 def main(csvfile, classifiers):
     df = pd.DataFrame([[None]*len(classifiers)], columns=classifiers)
