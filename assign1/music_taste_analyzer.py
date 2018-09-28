@@ -153,15 +153,18 @@ RD_TUNING = {
 }
 
 FEATURES = [
-    "danceability",
-    "energy",
-    "key",
-    "loudness",
-    "speechiness",
     "acousticness",
+    "danceability",
+    "duration_ms",
+    "energy",
     "instrumentalness",
+    "key",
     "liveness",
+    "loudness",
+    "mode",
+    "speechiness",
     "tempo",
+    "time_signature",
     "valence",
 ]
 
