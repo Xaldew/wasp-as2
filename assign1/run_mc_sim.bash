@@ -5,18 +5,18 @@
 csvfile="data/log.csv"
 simulations=200
 models=(
-    "knn"
-    "svm"
-    "nusvm"
-    "dtree"
+    # "knn"
+    # "svm"
+    # "nusvm"
+    # "dtree"
     "rdforest"
-    "adaboost"
+    # "adaboost"
     "grdboost"
-    "nbayes"
-    "gaussproc"
-    "lda"
-    "qda"
-    "mlpc"
+    # "nbayes"
+    # "gaussproc"
+    # "lda"
+    # "qda"
+    # "mlpc"
 )
 
 # Prepare the csv file
@@ -34,7 +34,7 @@ do
                --seed $RANDOM \
                --percent 0.2 \
                --n-iters 100 \
-               --dump ${mode}.pkl \
-               --file ${csvfile}
+               --dump ${mod}.pkl \
+               --file ${csvfile} >> data/output.txt
     done
 done

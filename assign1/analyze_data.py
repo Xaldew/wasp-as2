@@ -11,7 +11,7 @@ def main(csvfile):
     df = pd.read_csv(csvfile)
     classifiers = df.columns.values.tolist()
     X = np.zeros(df.dropna().shape)
-    m = np.zeros(len(classifiers)) 
+    m = np.zeros(len(classifiers))
     s = np.zeros(len(classifiers))
 
     plt.figure(1)
@@ -21,7 +21,7 @@ def main(csvfile):
         X[:, k] = df[classifiers[k]].dropna().tolist()
         
         m[k] = np.mean(X[:, k])
-        s[k] = np.std(X[:, k]) 
+        s[k] = np.std(X[:, k])
 
         print("{}: mu: {}, std: {}".format(classifiers[k], m[k], s[k]))
 

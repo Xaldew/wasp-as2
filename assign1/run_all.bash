@@ -2,18 +2,18 @@
 # Run all classifiers, saving the models.
 
 models=(
-    "knn"
-    "svm"
-    "nusvm"
-    "dtree"
+    # "knn"
+    # "svm"
+    # "nusvm"
+    # "dtree"
     "rdforest"
-    "adaboost"
+    # "adaboost"
     "grdboost"
-    "nbayes"
-    "gaussproc"
-    "lda"
-    "qda"
-    "mlpc"
+    # "nbayes"
+    # "gaussproc"
+    # "lda"
+    # "qda"
+    # "mlpc"
 )
 
 for mod in ${models[@]};

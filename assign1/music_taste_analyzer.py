@@ -107,9 +107,9 @@ RD_TUNING = {
     },
     "rdforest":
     {
-        "n_estimators": range(5, 100),
+        "n_estimators": range(2, 1000),
         "criterion": ["gini", "entropy"],
-        "max_depth": range(4, 16),
+        "max_depth": range(4, 64),
         "max_features": [None, "auto", "sqrt", "log2"],
     },
     "adaboost":
@@ -122,8 +122,9 @@ RD_TUNING = {
     {
         "loss": ["deviance", "exponential"],
         "learning_rate": scipy.stats.uniform(0.0, 1.0),
-        "n_estimators": range(100, 10000, 500),
-        "max_depth": range(2, 16),
+        "n_estimators": range(100, 10000, 100),
+        "max_depth": range(2, 64),
+        "subsample": scipy.stats.uniform(0.0, 1.0),
         "criterion": ["friedman_mse"],
     },
     "nbayes": {},
@@ -155,7 +156,7 @@ RD_TUNING = {
 FEATURES = [
     "acousticness",
     "danceability",
-    "duration_ms",
+    "duration",
     "energy",
     "instrumentalness",
     "key",
@@ -211,11 +212,6 @@ def main(training_data, new_data, classifier,
     # qualitative/cathegorical. For that sklearn preprocessing methods such as
     # OneHotEncoder() can be used.
 
-    # Split into training/validation set.
-    x_train, x_val, y_train, y_val = train_test_split(X_trainn, y_train,
-                                                      test_size=percent,
-                                                      random_state=seed)
-
     # Feed it with data and train it and write out score.
     clf = None
     niters = min(PARAM_SPACE_SZ[classifier], niters)
@@ -237,12 +233,10 @@ def main(training_data, new_data, classifier,
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         if not load:
-            clf.fit(X=x_train, y=y_train)
+            clf.fit(X=X_trainn, y=y_train)
 
-    val_score = clf.score(x_val, y_val)
     print("%s parameters: %s" % (classifier, str(clf.best_params_)))
     print("%s search score: %.2f %%" % (classifier, 100.0 * clf.best_score_))
-    print("%s validation score: %.2f %%" % (classifier, 100.0 * val_score))
 
     # Dump the trained model.
     if dump:
@@ -252,10 +246,10 @@ def main(training_data, new_data, classifier,
     # Write to the csv file
     if csvfile:
         df = pd.read_csv(csvfile)
-        df.at[df.shape[0]-1, classifier] = val_score
+        df.at[df.shape[0]-1, classifier] = clf.best_score_
 
         if df.tail(1).isnull().sum(axis=1).tolist()[0] == 0:
-            new_row = pd.DataFrame([[None]*df.shape[1]], 
+            new_row = pd.DataFrame([[None]*df.shape[1]],
                                     columns=df.columns.values.tolist())
             df = df.append(new_row, ignore_index=True)
 
