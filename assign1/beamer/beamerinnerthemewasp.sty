@@ -7,12 +7,6 @@
     \node[anchor=south west, outer sep=0pt, inner sep=0pt]
     (waspbg) at (0,2)
     {\includegraphics[width=1.0\paperwidth]{Black-hole-wasp.png}};
-    \node[anchor=south west, outer sep=10pt, inner sep=0pt]
-    (armlogo) at (0,1.9)
-    {\includegraphics[width=0.15\paperwidth]{arm_white}};
-    \node[outer sep=0pt, inner sep=0pt]
-    (lulogo) at (\the\paperwidth,1.9)
-    {\includegraphics[width=0.43\paperwidth]{lund_seal_neg}};
     \fill[color=armblue] (0,0) rectangle(2.95,1.9);
     \fill[color=armblack] (3.05,0) rectangle(\the\paperwidth,1.9);
     \ifnum\thepage>1\relax%
@@ -20,9 +14,6 @@
     \node[anchor=south east, outer sep=12.5pt, inner sep=0pt]
     (wasplogo) at (\the\paperwidth,0)
     {\includegraphics[width=0.4\textwidth]{wasp_logotyp_grey_180116}};
-    \node[anchor=south west, outer sep=12.5pt, inner sep=0pt]
-    (armlogo) at (10pt,0)
-    {\includegraphics[width=0.14\textwidth]{arm_blue}};
     \fi
   \end{tikzpicture}
 }
