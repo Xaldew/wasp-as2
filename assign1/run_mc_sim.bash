@@ -3,7 +3,7 @@
 # file. Warning: will overwrite any file already present at csvfile argument
 
 csvfile="data/log.csv"
-simulations=200
+simulations=1000
 models=(
     # "knn"
     # "svm"
