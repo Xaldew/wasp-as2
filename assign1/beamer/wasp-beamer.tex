@@ -20,16 +20,22 @@
 \begin{frame}
   \frametitle{Choosen Algorithms}
   \begin{itemize}
-  \item K-Nearest-Neighbours
+  \item Random Forest
   \item Support Vector Machines
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}
-  \frametitle{K-Nearest-Neighbours}
-
+  \frametitle{Random Forest}
+\begin{itemize}
+\item Based on two concepts: (i)\underline{decision trees} and (ii)\underline{bagging}
+\item \textbf{Bagging} $\rightarrow$ averaging between many small (and not so good) estimators
+\item \textbf{Decision Tree} $\rightarrow$ the formalization of a step-by-step decision process in which different yes-or-no questions are asked to the data unitl a decision is taken
+\item \textbf{Random Forest} $\rightarrow$ comprehends the selection of a number of estimators (i.e. of decision trees) and training each of them on a random subset of the dataset (overfitting will happen, decision trees are affected by this)
+\item When evaluating over new data average the outcome of each of the trained estimators
+\end{itemize}
 \end{frame}
+
 
 \begin{frame}
   \frametitle{Support Vector Machines}
