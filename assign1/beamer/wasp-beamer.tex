@@ -4,7 +4,7 @@
 \usepackage{fancyvrb}
 \title{Supervised Music Taste Analysis}
 \date{WASP Supervised Machine Learning}
-\author[Gustaf]{Gustaf Waldemarson \texttt{gustaf.waldemarson@arm.com}}
+\author[Agents 47]{The Hitmen --- Agents 47}
 
 \usetheme{wasp}
 
@@ -21,25 +21,29 @@
   \frametitle{Choosen Algorithms}
   \begin{itemize}
   \item Random Forest
-  \item Support Vector Machines
+  \item Gradient Boost
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Random Forest}
-\begin{itemize}
-\item Based on two concepts: (i)\underline{decision trees} and (ii)\underline{bagging}
-\item \textbf{Bagging} $\rightarrow$ averaging between many small (and not so good) estimators
-\item \textbf{Decision Tree} $\rightarrow$ the formalization of a step-by-step decision process in which different yes-or-no questions are asked to the data unitl a decision is taken
-\item \textbf{Random Forest} $\rightarrow$ comprehends the selection of a number of estimators (i.e. of decision trees) and training each of them on a random subset of the dataset (overfitting will happen, decision trees are affected by this)
-\item When evaluating over new data average the outcome of each of the trained estimators
-\end{itemize}
+  \begin{itemize}
+  \item Based on two concepts: (i)\underline{decision trees} and (ii)\underline{bagging}
+  \item \textbf{Bagging} $\rightarrow$ averaging between many small (and not so good) estimators
+  \item \textbf{Decision Tree} $\rightarrow$ the formalization of a step-by-step decision process in which different yes-or-no questions are asked to the data unitl a decision is taken
+  \item \textbf{Random Forest} $\rightarrow$ comprehends the selection of a number of estimators (i.e. of decision trees) and training each of them on a random subset of the dataset (overfitting will happen, decision trees are affected by this)
+  \item When evaluating over new data average the outcome of each of the trained estimators
+  \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{Support Vector Machines}
+  \frametitle{Gradient Boosting}
+  \begin{itemize}
+  \item \textbf{Boosting} combines multiple weak learners, usually iteratively, into a single strong one. If the errors in the learners are uncorrelated the learners can be combined using majority voting. Example of learners are AdaBoost, Gradient Boost and XGBoost.
 
+  \item \textbf{Gradient Boosting} can be seen as an optimization problem where we seek to minimize a loss function. New weak learners are fitted to the residuals of the previous learners, thus minimizing the residuals and reducing the loss function.
+  \end{itemize}
 \end{frame}
 
 
@@ -53,7 +57,6 @@
     FILE                  The Music Taste classifier training data.
     FILE                  The new songs to test the classifier on.
 
-    optional arguments:
     -h, --help            show this help message and exit
     -c {dtree,lda,qda,grdboost,knn,svm,nbayes,gaussproc,mlpc,adaboost,nusvm,rdforest},
     The type of classifier to use.
@@ -129,6 +132,17 @@
 
 
 \begin{frame}
+  \frametitle{Conclusion and Production Choice}
+  \begin{itemize}
+  \item 91 \% on test set.
+  \item Random Forest performed best, hence our choice.
+  \item Relatively simple algorithm to understand.
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
   \frametitle{Next Steps}
 
   From here, there are still a number of things one may want to do:
@@ -139,7 +153,6 @@
   \end{itemize}
 
 \end{frame}
-
 
 \bgroup
 \setbeamertemplate{background}{}
