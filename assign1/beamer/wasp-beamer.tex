@@ -63,8 +63,6 @@
     -r, --random          Perform a randomized search over the hyperparameters.
     -n N_ITERS, --n-iters N_ITERS
     Number of iterations for the randomized search.
-    -d DUMP, --dump DUMP  File to dump the classifier model to.
-    -l LOAD, --load LOAD  Load the classifier model from this file.
 \end{Verbatim}
 
 \end{frame}
@@ -108,30 +106,25 @@
 
 \end{frame}
 
+
+
 \begin{frame}
   \frametitle{Results}
-  \begin{columns}
-    \begin{column}{0.5\columnwidth}
-      \begin{description}
-      \item[knn] 76 \%
-      \item[svm] 81 \%
-      \item[nusvm] 81 \%
-      \item[dtree] 73 \%
-      \item[rdforest] 81 \%
-      \item[adaboost] 79 \%
-      \end{description}
-    \end{column}
-    \begin{column}{0.5\columnwidth}
-      \begin{description}
-      \item[grdboost] 79 \%
-      \item[nbayes] 75 \%
-      \item[gaussproc] 75 \%
-      \item[lda] 78 \%
-      \item[qda] 78 \%
-      \item[mlpc] 81 \%
-      \end{description}
-    \end{column}
-  \end{columns}
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{mc_histograms.pdf}
+    \label{fig:mc-histograms}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Results}
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{mc_boxplot.pdf}
+    \label{fig:mc-boxplot}
+  \end{figure}
 \end{frame}
 
 
