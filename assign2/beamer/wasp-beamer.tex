@@ -49,21 +49,25 @@
     affect validation results much (Got 94.1 \% with batch size 64). Too big
     batches may however consume too much memory for efficient training.
 
-  \item[Reviews/Unique] Increasing these values can add a significant amount of
-    data to the model, and thus \textbf{might} improve the result (93.7 \%), but
-    will also take longer to train. Reducing it barely changs the result. (93.1
-    \%).
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+
+  \item[Choices] Increasing these values can add a significant amount of data to
+    the model, and thus \textbf{might} improve the result (93.7 \%), but will
+    also take longer to train. Reducing it barely changs the result. (93.1 \%).
 
   \item[Dropout] 20\% dropout helps slightly: 94.7 \%.  40\% dropout helps a bit
     more: 95.5 \%. Even higher (80 \%) didn't improve the final result, but did
     make the learning process improve for all 10 epochs.
 
-  \item[Architecture] Krohn's architecture seems to perform slightly better, but
-    takes a little longer to train than Chollet's. Comparing this with a network
-    architecture with only dense layers (~88 \%), convolutional architectures seem
-    superior.
-
-  \item[Smaller Network]
+  \item[Archs] Krohn's architecture seems to perform slightly better, but takes
+    a little longer to train than Chollet's. Comparing this with a network
+    architecture with only dense layers (~88 \%), convolutional architectures
+    seem superior.
 
   \end{itemize}
 
