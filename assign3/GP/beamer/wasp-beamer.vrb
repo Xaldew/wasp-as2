@@ -1,0 +1,19 @@
+\frametitle{Gaussian Process}\framesubtitle {GPyOpt}
+	
+Bayesian optimization tool built on top of GPy for an easy usage. \linebreak
+
+\textbf{Example:}
+
+Find the minimum value of the function $(6x-2)^2*\sin{12x-4}$.
+
+
+\begin{Verbatim}[fontsize=\footnotesize]
+def f(x):
+	return (6*x - 2)**2 * np.sin(12*x-4)
+
+domain = [{ 'name': 'var_1', 'type': 'continuous','domain': (0, 1)}]
+Bopt = BayesianOptimization(f=f, domain=domain)
+Bopt.run_optimization(max_iter=5)
+\end{Verbatim}
+
+
