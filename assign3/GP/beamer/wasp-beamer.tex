@@ -1,0 +1,198 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fancyvrb}
+\title{Deep Learning on the IMDB Dataset}
+\date{WASP Deep Learning}
+\author[Agents 47]{The Hitmen --- Agents 47}
+
+\usepackage{svg}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+\usetheme{wasp}
+
+\graphicspath{{./graphics/}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\begin{frame}{Gaussian Process}{Introduction}
+
+Method for performing \emph{non-parametric} regression. Instead of trying to find a function $f$ to fit some dataset $X$, we can model the \emph{function itself} pointwise as a multivariate Gaussian distribution.
+
+\begin{equation}
+\begin{matrix}
+	f(X) \\
+	f(X_t)
+\end{matrix} \sim
+\mathcal{N} \left(
+	\begin{bmatrix}
+		\mu_x \\
+		\mu_{x_t}
+	\end{bmatrix}, 
+	\begin{bmatrix}
+		\Sigma_{xx} & \Sigma_{xx_t} \\
+		\Sigma_{x_tx} & \Sigma_{x_tx_t}
+	\end{bmatrix}
+\right)
+\end{equation}
+where $X_t$ are the data points corresponding to the sought unknown function values. By designing a prior, $\mu$ and $\Sigma$ can be found and the function search space is reduced.  
+
+
+\end{frame}
+
+\begin{frame}{Gaussian Process}{Simple example I}
+	
+	\textbf{Problem:}
+	
+		Given a set of 4 data points in the range $[4, 8]$, calculate the GP over the interval $[0, 10]$ in a set of 100 points. 
+		
+	\textbf{Solution:}
+
+	As prior, a multivariate Gaussian is created with $\mu = 0$ and the covariance using the Radial Basis Function as a kernel:
+	\begin{equation}
+		\Sigma = \left\{~\Sigma_{ij} = \exp \left( -\frac{1}{2\gamma} (x_i- x_j)^2 \right) ~ \right\},
+	\end{equation}
+	where $\gamma$ is a design parameter for smoothness. 
+	
+	The posterior $p \left( f(X_t) | f(X) \right) $ can then be found. 
+
+\end{frame}
+
+\begin{frame}{Gaussian Process}{Simple example II}
+
+	\newlength{\figureheight}
+	\newlength{\figurewidth}
+	
+	\begin{figure}[!t]
+		\small
+		\centering  
+		\begin{subfigure}[b]{0.45\linewidth}
+			\centering 
+			\setlength\figureheight{4cm}
+			\setlength\figurewidth{\linewidth}
+			\input{example_prior.tex}
+			\caption{Three samples drawn from the prior.}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.45\linewidth}
+			\centering 
+			\setlength\figureheight{4cm}
+			\setlength\figurewidth{\linewidth}    
+			\input{example_post.tex}
+			\caption{Three samples drawn from the posterior.}
+		\end{subfigure}
+		\caption{Samples drawn from both the prior and the posterior. Also shows the data points, posterior mean and standard deviation.}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]{Gaussian Process}{GPy}
+	Tool for using GP's in python. Includes a modular, object oriented approach for easy use. \linebreak
+	
+	\textbf{Example}:
+	
+	Instead of hard coding the kernel hyperparameters, the likelihood of the data can be maximized over the hyperparameter. 
+	
+\begin{Verbatim}[fontsize=\footnotesize]
+\# Data
+n = 20
+X = np.random.uniform(3, 7, n).reshape(-1,1)
+Y = np.sin(X) + 0.1*np.random.randn(n, 1)
+		 
+\# Basic regression
+kernel = GPy.kern.RBF(input\_dim=1, variance=1,lengthscale=1)
+m = GPy.models.GPRegression(X, Y, kernel)
+\end{Verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Gaussian Process}{GPy}
+	
+	\begin{figure}[!t]
+		\centering  
+		\begin{subfigure}[b]{0.45\linewidth}
+			\centering 
+			\includegraphics[scale=0.3]{example_preopt.png}
+			\caption{No optimization}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.45\linewidth}
+			\centering    
+			\includegraphics[scale=0.3]{example_postopt.png}
+			\caption{Using \texttt{m.optimize()}}
+		\end{subfigure}
+		\caption{}
+	\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Gaussian Process}{Bayesian Optimization}
+
+Tuning hyperparameters for classifiers is not trivial. For smaller algorithms, gridsearch or randomsearch could for example be used. For larger models, this becomes unfeasible as the sheer time of computing an evaluation is large. Instead some policy is needed to choose the next configuration of hyperparameters to test. \linebreak 
+
+Consider some loss-metric for the classifier as a function $f$ over the hyperparameters $X$, we would like to find the set of hyperparameters that minimizes this function. However, this function is unknown and can only be evaluated (slowly) pointwise. 
+
+\end{frame}
+
+\begin{frame}{Gaussian Process}{Bayesian Optimization}
+The function $f$ could instead be modeled as a Gaussian process. From the GP a proposal for the optimal choice of $X$ can be generated, each new evaluation will then bring more information about the function. \linebreak
+
+How to actually choose the proposals can be done in a multitude of ways. Since the model captures uncertainties, proposals can be put in areas of low mean, favoring \emph{Exploitation}, or in areas of high variance, favoring \emph{Exploration}. Usually an \emph{Aquisition function} is designed to balance the choice between the two extremes.
+\end{frame}
+
+\begin{frame}[fragile]{Gaussian Process}{GPyOpt}
+	
+Bayesian optimization tool built on top of GPy for an easy usage. \linebreak
+
+\textbf{Example:}
+
+Find the minimum value of the function $(6x-2)^2*\sin{12x-4}$.
+
+
+\begin{Verbatim}[fontsize=\footnotesize]
+def f(x):
+	return (6*x - 2)**2 * np.sin(12*x-4) 
+
+domain = [{ 'name': 'var_1', 'type': 'continuous','domain': (0, 1)}]
+Bopt = BayesianOptimization(f=f, domain=domain)
+Bopt.run_optimization(max_iter=5)
+\end{Verbatim}
+
+
+\end{frame}
+
+\begin{frame}{Gaussian Process}{GPyOpt}
+
+
+\begin{figure}[!t]
+	\centering  
+	\includegraphics[scale=0.3]{bopt.png}
+	\caption{The Gaussian process and acquisition function after 5 iteration steps.}
+\end{figure}
+
+\end{frame}
+
+
+\bgroup
+\setbeamertemplate{background}{}
+\setbeamercolor{background canvas}{bg=black}
+% \setbeamertemplate{navigation symbols}{}
+\begin{frame}[t,plain]{}{}
+  \begin{center}
+    {\tiny \textcolor{white}{The End}}
+  \end{center}
+\end{frame}
+\egroup
+
+\end{document}

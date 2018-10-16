@@ -1,0 +1,42 @@
+\mode<presentation>
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \fill[color=waspwhite] (0,2) rectangle (\the\paperwidth,\the\paperheight);
+    \node[anchor=south west, outer sep=0pt, inner sep=0pt]
+    (waspbg) at (0,2)
+    {\includegraphics[width=1.0\paperwidth]{Black-hole-wasp.png}};
+    \fill[color=armblue] (0,0) rectangle(2.95,1.9);
+    \fill[color=armblack] (3.05,0) rectangle(\the\paperwidth,1.9);
+    \ifnum\thepage>1\relax%
+    \fill[waspwhite,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \node[anchor=south east, outer sep=12.5pt, inner sep=0pt]
+    (wasplogo) at (\the\paperwidth,0)
+    {\includegraphics[width=0.4\textwidth]{wasp_logotyp_grey_180116}};
+    \fi
+  \end{tikzpicture}
+}
+
+% Title page
+\defbeamertemplate*{title page}{wasp}[1][]
+{
+  \vskip4cm%
+  \begin{center}
+    \begin{beamercolorbox}[wd=15cm,leftskip=1cm,sep=8pt,#1]{title page header}
+      \usebeamerfont{title}\inserttitle\par%
+    \end{beamercolorbox}%
+  \end{center}
+  \vskip2.25cm%
+  \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{author}
+    \usebeamerfont{author}\insertauthor%
+  \end{beamercolorbox}
+  \vskip0.2cm%
+  \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{date}
+    \usebeamerfont{author}\insertdate%
+  \end{beamercolorbox}
+  \vfill
+}
+
+\mode
+<all>
