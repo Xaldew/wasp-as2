@@ -6,9 +6,27 @@
 \date{WASP Deep Learning}
 \author[Agents 47]{The Hitmen --- Agents 47}
 
+%\usepackage{enumitem}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+\newlength\figureheight
+\newlength\figurewidth
+
 \usetheme{wasp}
 
 \graphicspath{{./graphics/}}
+
+\usepackage{lipsum}
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
 
 \begin{document}
 
@@ -53,10 +71,65 @@
 
 
 \begin{frame}{RNN}{Recurrent Neural Networks}
+
+	Output of the layer is fed back into the layer, which can be seen as a recursion over a time series.
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{graphics/RNN-unrolled.png}
+	\end{figure}
+
+	Testing the impact of stacking layers, 4 models in total are trained. Model 1 contains 1 32-sized RNN layer with 0.2 dropout, Model 2 contains 2 such layers and so on. This is then trained for 5 epochs with 128 batch size. 
+
+
+\blfootnote{\tiny Image courtesy of Christopher Olah, \url{http://colah.github.io/posts/2015-08-Understanding-LSTMs/}}
   
 \end{frame}
 
+\begin{frame}{RNN}{Recurrent Neural Networks}
+	\begin{figure}
+	\centering
+
+	\setlength\figureheight{3cm}
+	\setlength\figurewidth{0.5\linewidth}
+	
+	\input{graphics/RNN_acc.tex}
+	\caption{Training (circle) vs Validation (line) accuracy.} 
+	\end{figure}
+\end{frame}
+
+\begin{frame}{RNN}{Recurrent Neural Networks}
+	
+	\noindent
+	\begin{minipage}{0.45\textwidth}%
+		 The different models obtain a ROC value of 
+		 \begin{itemize}%[noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt]
+		 	\item Model 1: 86.34
+		 	\item Model 2: 93.49
+		 	\item Model 3: 66.09
+		 	\item Model 4: 52.38
+		 \end{itemize}
+	 	Considering the histograms as well, it can be concluded that adding additional layers \emph{can} improve performace but also increases the risk of not converging as seen in Model 3 and 4.
+	\end{minipage} \hfill
+	\begin{minipage}{0.45\textwidth}%
+		\begin{figure}
+			\centering
+			
+			\setlength\figureheight{3cm}
+			\setlength\figurewidth{0.5\linewidth}
+			
+			\input{graphics/RNN_hists.tex}
+			\caption{Histograms over score for best validation accuracy.} 
+		\end{figure}
+	\end{minipage}
+\end{frame}
+
+
 \begin{frame}{LSTM}{Long Short Term Memory}
+
+LSTM networks are type of RNN that tries to remedy the hardness of training long-term dependence in regular RNN network. This is done by introducing more complex connections between the recursions. 
+
+We will here test the impact of different sizes of the
   
 \end{frame}
 
