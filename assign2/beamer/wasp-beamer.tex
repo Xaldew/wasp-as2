@@ -66,14 +66,14 @@
 
   \item[Archs] Krohn's architecture seems to perform slightly better, but takes
     a little longer to train than Chollet's. Comparing this with a network
-    architecture with only dense layers (~88 \%), convolutional architectures
+    architecture with only dense layers ($\sim88$ \%), convolutional architectures
     seem superior.
 
   \end{itemize}
 
 \end{frame}
 
-\iffalse
+
 \begin{frame}{Convnets}{Training History}
 
   \begin{columns}
@@ -103,7 +103,6 @@
   \end{figure}
 
 \end{frame}
-\fi
 
 
 \begin{frame}{Convnets}{Why Convolutions for NLP?}
@@ -199,7 +198,8 @@ We will here test the impact of different sizes of the LSTM layers and the numbe
 		\item Model 3: 90.09
 		\item Model 4: 92.40
 	\end{itemize}
-	Making the network bigger increases the accuracy and the well-posendess of the scores. However, the results are still only roughly as good as the best RNN network. 
+	Making the network bigger increases the accuracy of the scores. However,
+        the results are still only roughly as good as the best RNN network.
 \end{minipage} \hfill
 \begin{minipage}{0.45\textwidth}%
 	\begin{figure}
@@ -225,7 +225,7 @@ We will here test the impact of different sizes of the LSTM layers and the numbe
   \item However, convnets are simpler and faster to train so would be the
     supperior choice in this case.
 
-  \item It was easier to achieve better results with LSTM.
+  \item Between RNN and LSTM, it was easier to achieve better results with LSTM.
 
   \end{itemize}
 
