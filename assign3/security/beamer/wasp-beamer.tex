@@ -1,0 +1,140 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fancyvrb}
+\title{Deep Learning for Computer Security}
+\date{WASP Deep Learning}
+\author[Agents 47]{The Hitmen --- Agents 47}
+
+\usepackage{svg}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+\usetheme{wasp}
+
+\graphicspath{{./graphics/}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Machine Learning in Computer Security}
+
+  \begin{itemize}
+
+  \item Machine Learning is good at detecting patterns, and many computer
+    viruses, worms, rootkits and so forth work by exploiting the computer in
+    certain intrusion patterns.
+
+  \item Thus, machine learning could feasibly be used as a part of a anti-virus
+    suite to try to detect these, and thus consequently stop the offending
+    process(es) or hacking attempts.
+
+  \item Also, a lot of data already exist in data-bases for old viruses and
+    vulnerabilities, so these could possibly be reused to train the networks.
+
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Machine Learning for Security}{5-Pillars of Security}
+
+  \note{Machine Learning is probably not very good for ensuring the 5-pillars of
+    security:}
+
+  \begin{description}
+
+  \item[Confidentiality] Protection of information from disclosure to
+    unauthorized individuals, systems, or entities.
+
+  \item[Integrity] Protection of information, systems, and services from
+    unauthorized modification or destruction.
+
+  \item[Availability] Timely, reliable access to data and information services
+    by authorized users.
+
+  \item[Non-repudiation] The ability to correlate, with high certainty, a
+    recorded action with its originating individual or entity.
+
+  \item[Authentication] The ability to verify the identity of an individual or
+    entity.
+
+  \end{description}
+
+\end{frame}
+
+\begin{frame}{Machine Learning for Security}{3-Pillars for \textbf{Computer} Security}
+
+  \note{In particular, in *computer* security, we usually only care about
+    /confidientiality/, /integrity/, and /authentication/. However, one might
+    assume that machine learning could be used for some aspect of this, however,
+    machine learning is good for finding or creating /patterns/, and security in
+    this context relies on the complete /absence/ of recognizable
+    patterns. Thus, it is quite unlikely that deep learning will be used as a
+    core feature of computer security.}
+
+  \begin{itemize}
+  \item Confidentiality
+  \item Integrity
+  \item Authentication
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Machine Learning for Security}{Independent Validation}
+
+  \begin{itemize}
+  \item Independent validation security algorithms
+  \item Is the mathematics behind the algorithm sound?
+  \item Does the algorithm perform the same for all kinds of inputs?
+    \begin{itemize}
+    \item Could the algorithm be trained in such a way that it would contain a
+      backdoor?
+    \end{itemize}
+  \end{itemize}
+
+  \note{Furthermore, the strength of many computer security algorithms depend on
+    being rigorously analyzable. If someone develops a deep learning based
+    algorithm for ensuring security, how could independent entities validate
+    that it works as intended and does not contain some kind of backdoor for
+    very specific inputs?}
+
+  \note{We are already weary of accepting algorithms provided by the NSA. So
+    would you trust a network they had trained?}
+
+\end{frame}
+
+
+\begin{frame}{Possible Problems with Machine Learning}
+
+\begin{itemize}
+\item Lack of data.
+\item Company providing intrusion data $=$ Admitting they have been hacked.
+\item GDPR + Hacked = Fines\ldots
+\end{itemize}
+    
+\end{frame}
+
+\bgroup
+\setbeamertemplate{background}{}
+\setbeamercolor{background canvas}{bg=black}
+% \setbeamertemplate{navigation symbols}{}
+\begin{frame}[t,plain]{}{}
+  \begin{center}
+    {\tiny \textcolor{white}{The End}}
+  \end{center}
+\end{frame}
+\egroup
+
+\end{document}

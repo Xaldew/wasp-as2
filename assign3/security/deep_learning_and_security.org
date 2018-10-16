@@ -1,0 +1,57 @@
+#+TITLE: Deep Learning and Security
+#+AUTHOR: Gustaf Waldemarson
+
+* What kind of security problems can Machine Learning help with?
+
+  Machine Learning is good a detecting patterns, and many computer viruses,
+  worms, rootkits and so forth work by exploiting the computer in certain
+  intrusion patterns. Thus, machine learning could feasibly be used as a part of
+  a anti-virus suite to try to detect these, and thus consequently stop the
+  offending process(es) or hacking attempts.
+
+  Also, a lot of data already exist in data-bases for old viruses and
+  vulnerabilities, so these could possibly be reused to train the networks.
+
+
+* What kind of security problems is Machine Learning not appropriate for?
+
+  Machine Learning is probably not very good for ensuring the 5-pillars of
+  security:
+
+  - Confidentiality :: Protection of information from disclosure to
+       unauthorized individuals, systems, or entities. Confidentiality is
+       data oriented.
+
+  - Integrity       :: Protection of information, systems, and services from
+       unauthorized modification or destruction. Integrity is data oriented.
+
+  - Availability    :: Timely, reliable access to data and information
+       services by authorized users. Availability is service oriented.
+
+  - Non-repudiation :: The ability to correlate, with high certainty, a
+       recorded action with its originating individual or
+       entity. Non-repudiation is entity oriented.
+
+  - Authentication  :: The ability to verify the identity of an individual or
+       entity. Authentication is entity oriented.
+
+  In particular, in *computer* security, we usually only care about
+  /confidientiality/, /integrity/, and /authentication/. However, one might
+  assume that machine learning could be used for some aspect of this, however,
+  machine learning is good for finding or creating /patterns/, and security in
+  this context relies on the complete /absence/ of recognizable patterns. Thus,
+  it is quite unlikely that
+
+  Furthermore, the strength of many computer security algorithms depend on being
+  rigorously analyzable. If someone develops a deep learning based algorithm for
+  ensuring security, how could independent entities validate that it works as
+  intended and does not contain some kind of backdoor for very specific inputs?
+
+
+* Potential Problems
+
+  The biggest problem with machine learning in the context of computer security
+  is the /lack/ of data. Machine Learning needs large amounts of diverse data to
+  be effective, but many companies are often reluctant to share data that
+  involves computer intrusions and access patterns, as that may reflect poorly
+  on the company.
