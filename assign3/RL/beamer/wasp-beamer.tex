@@ -71,13 +71,13 @@
 % Good source: http://karpathy.github.io/2016/05/31/rl/ also https://en.wikipedia.org/wiki/Reinforcement_learning#Direct_policy_search
 \begin{frame}{Policy Gradients}
   \begin{itemize}
-  \item Construct a mapping from some parameter space to the space of possible policies. Optimize over the parameters to find the best policy.
+  \item Construct a mapping from some parameter space to the space of possible policies. Each parameter assignment results in a policy. Optimize over the parameters to find the best policy.
   \item For example, train a neural network to represent our policy:
   \begin{description}
   \item[Input:] Current and possibly previous states.
   \item[Ouput:] The next action to take or a distibution of actions to sample from.
   \end{description}
-  Each possible assignment of the parameters/weights in the network results in a policy.
+  In this case, the weights of the network parameterize the policy implemented by the network.
   \end{itemize}
 \end{frame}
 
@@ -88,7 +88,7 @@
   \item This classification is then used to train the network, making good actions more probable in the future.
   \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{trajectory_of_actions.png}
+    \includegraphics[width=0.85\textwidth]{trajectory_of_actions.png}
   \end{figure}
   \end{itemize}
 \end{frame}
@@ -98,7 +98,7 @@
   There are some problems with policy gradients and reinforcement learning in general:
   \begin{description}
   \item[Credit assignment:] How do we find out what actions were good or bad in a long trajectory of actions?\\
-  Example: why did the agent win a game of chess?
+  Example: what moves caused the agent win a game of chess?
   \item[Sparse reward:] How do we handle sparse rewards?\footnote{See e.g. curiosity-driven exploration and hindsight experience replay.}\\
   Example: starting out with random actions the agent will probably never win a game of chess if no reward is given until the end of the game.
   \end{description}
